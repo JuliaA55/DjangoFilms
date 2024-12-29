@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Movie
+from .models import Movie, MovieForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def movie_list(request):
@@ -31,3 +33,20 @@ def movie_create(request):
         return redirect('movie_list')
 
     return render(request, 'movies/movie_create.html')
+
+def movie_update(request, pk):
+    movie = Movie.objects.get(id=pk)
+    if request.method == 'POST':
+        form = MovieForm(request.POST, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect('movie_list')
+    else:
+        form = MovieForm(instance=movie)
+    return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
+
+
+def movie_delete(request, pk):
+    movie = Movie.objects.get(id=pk)
+    movie.delete()
+    return HttpResponseRedirect(reverse('movie_list'))

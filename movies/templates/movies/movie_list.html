@@ -29,7 +29,13 @@
                             <td>{{ movie.title }}</td>
                             <td>{{ movie.genre }}</td>
                             <td>
-                                <!--<a href="{{ movie.id }}/" class="btn btn-primary btn-sm">Деталі</a>-->
+                                <button type="button" class="btn btn-success">
+                                    <a href="{% url 'movie_update' movie.id %}" style="text-decoration: none; color: white;">Оновити</a>
+                                </button>
+                                <button type="button" class="btn btn-danger">
+                                    <a href="{% url 'movie_delete' movie.id %}" style="text-decoration: none; color: white;">Видалити</a>
+                                </button>
+                                
                             </td>
                         </tr>
                     {% empty %}
