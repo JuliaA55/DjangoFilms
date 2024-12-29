@@ -1,0 +1,112 @@
+[
+    {
+        "model": "movies.movie",
+        "pk": 1,
+        "fields": {
+            "title": "The Shawshank Redemption",
+            "description": "Two imprisoned men bond over several years.",
+            "release_date": "1994-09-22",
+            "director": "Frank Darabont",
+            "genre": "Drama"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 2,
+        "fields": {
+            "title": "The Godfather",
+            "description": "The aging patriarch of an organized crime dynasty transfers control to his son.",
+            "release_date": "1972-03-24",
+            "director": "Francis Ford Coppola",
+            "genre": "Crime"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 3,
+        "fields": {
+            "title": "Inception",
+            "description": "A thief who steals corporate secrets through dream-sharing technology is given a task to plant an idea.",
+            "release_date": "2010-07-16",
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 4,
+        "fields": {
+            "title": "Pulp Fiction",
+            "description": "The lives of two mob hitmen, a boxer, and a pair of bandits intertwine.",
+            "release_date": "1994-10-14",
+            "director": "Quentin Tarantino",
+            "genre": "Crime"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 5,
+        "fields": {
+            "title": "The Dark Knight",
+            "description": "Batman faces the Joker, a criminal mastermind who brings chaos to Gotham.",
+            "release_date": "2008-07-18",
+            "director": "Christopher Nolan",
+            "genre": "Action"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 6,
+        "fields": {
+            "title": "Forrest Gump",
+            "description": "The presidencies of Kennedy and Johnson, Vietnam, and more through the perspective of an Alabama man.",
+            "release_date": "1994-07-06",
+            "director": "Robert Zemeckis",
+            "genre": "Drama"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 7,
+        "fields": {
+            "title": "The Matrix",
+            "description": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
+            "release_date": "1999-03-31",
+            "director": "Lana Wachowski, Lilly Wachowski",
+            "genre": "Sci-Fi"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 8,
+        "fields": {
+            "title": "Fight Club",
+            "description": "An insomniac office worker forms an underground fight club as a form of male bonding.",
+            "release_date": "1999-10-15",
+            "director": "David Fincher",
+            "genre": "Drama"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 9,
+        "fields": {
+            "title": "Interstellar",
+            "description": "A team of explorers travel through a wormhole in space to ensure humanity's survival.",
+            "release_date": "2014-11-07",
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 10,
+        "fields": {
+            "title": "The Lord of the Rings: The Return of the King",
+            "description": "Gandalf and Aragorn lead the World of Men against Sauron's army.",
+            "release_date": "2003-12-17",
+            "director": "Peter Jackson",
+            "genre": "Fantasy"
+        }
+    }
+]
