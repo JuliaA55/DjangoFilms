@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Додати новий фільм</h1>
-        <form method="post" action="{% url 'movie_create' %}" class="mt-4">
+        <form method="post" action="{% url 'movie_create' %}" class="mt-4" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="title" class="form-label">Назва фільму</label>
@@ -30,6 +30,10 @@
             <div class="mb-3">
                 <label for="genre" class="form-label">Жанр</label>
                 <input type="text" class="form-control" id="genre" name="genre" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="photo" class="form-control" placeholder="Choose photo of film">
             </div>
             <button type="submit" class="btn btn-primary">Додати фільм</button>
         </form>

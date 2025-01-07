@@ -19,6 +19,7 @@
                         <th>#</th>
                         <th>Назва</th>
                         <th>Жанр</th>
+                        <th>Фото</th>
                         <th>Дії</th>
                     </tr>
                 </thead>
@@ -28,6 +29,13 @@
                             <td>{{ forloop.counter }}</td>
                             <td>{{ movie.title }}</td>
                             <td>{{ movie.genre }}</td>
+                            <td>
+                                {% if movie.photo %}
+                                    <img src="{{movie.photo.url}}" class="card-img-top" alt="..." width="100px" height="150px">
+                                {% else %}
+                                    <img src="https://m.media-amazon.com/images/I/719uMEB4kiL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="..." width="100px" height="100px">
+                                {% endif %}
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-success">
                                     <a href="{% url 'movie_update' movie.id %}" style="text-decoration: none; color: white;">Оновити</a>

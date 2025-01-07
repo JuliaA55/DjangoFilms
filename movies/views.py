@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Movie, MovieForm
+from .models import Movie
+from .forms import MovieForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -14,27 +15,27 @@ def movie_detail(request, id):
     return render(request, 'movies/movie_detail.html', {'movie': movie})
 
 
-def movie_create(request):
-    if request.method == 'POST':
-        title = request.POST['title']
-        description = request.POST['description']
-        release_date = request.POST['release_date']
-        director = request.POST['director']
-        genre = request.POST['genre']
+#def movie_create(request):
+#    if request.method == 'POST':
+#        title = request.POST['title']
+#        description = request.POST['description']
+#        release_date = request.POST['release_date']
+#       director = request.POST['director']
+#     genre = request.POST['genre']
+#
+#       Movie.objects.create(
+#          title=title,
+#         description=description,
+#        release_date=release_date,
+#       director=director,
+#            genre=genre
+#        )
+#
+#       return redirect('movie_list')
+#
+#    return render(request, 'movies/movie_create.html')
 
-        Movie.objects.create(
-            title=title,
-            description=description,
-            release_date=release_date,
-            director=director,
-            genre=genre
-        )
-
-        return redirect('movie_list')
-
-    return render(request, 'movies/movie_create.html')
-
-def movie_update(request, pk):
+#def movie_update(request, pk):
     movie = Movie.objects.get(id=pk)
     if request.method == 'POST':
         form = MovieForm(request.POST, instance=movie)
@@ -45,6 +46,26 @@ def movie_update(request, pk):
         form = MovieForm(instance=movie)
     return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
 
+def movie_create(request):
+    if request.method == 'POST':
+        form = MovieForm(request.POST, request.FILES)  # Додано request.FILES для роботи з файлами
+        if form.is_valid():
+            form.save()  # Зберігаємо дані разом із зображенням
+            return redirect('movie_list')
+    else:
+        form = MovieForm()
+    return render(request, 'movies/movie_create.html', {'form': form})
+
+def movie_update(request, pk):
+    movie = Movie.objects.get(id=pk)
+    if request.method == 'POST':
+        form = MovieForm(request.POST, request.FILES, instance=movie)  # Додано request.FILES для оновлення файлу
+        if form.is_valid():
+            form.save()  # Зберігаємо зміни разом із оновленням зображення
+            return redirect('movie_list')
+    else:
+        form = MovieForm(instance=movie)
+    return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
 
 def movie_delete(request, pk):
     movie = Movie.objects.get(id=pk)
