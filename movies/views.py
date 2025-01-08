@@ -15,59 +15,35 @@ def movie_detail(request, id):
     return render(request, 'movies/movie_detail.html', {'movie': movie})
 
 
-#def movie_create(request):
-#    if request.method == 'POST':
-#        title = request.POST['title']
-#        description = request.POST['description']
-#        release_date = request.POST['release_date']
-#       director = request.POST['director']
-#     genre = request.POST['genre']
-#
-#       Movie.objects.create(
-#          title=title,
-#         description=description,
-#        release_date=release_date,
-#       director=director,
-#            genre=genre
-#        )
-#
-#       return redirect('movie_list')
-#
-#    return render(request, 'movies/movie_create.html')
-
-#def movie_update(request, pk):
-    movie = Movie.objects.get(id=pk)
-    if request.method == 'POST':
-        form = MovieForm(request.POST, instance=movie)
-        if form.is_valid():
-            form.save()
-            return redirect('movie_list')
-    else:
-        form = MovieForm(instance=movie)
-    return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
 
 def movie_create(request):
     if request.method == 'POST':
-        form = MovieForm(request.POST, request.FILES)  # Додано request.FILES для роботи з файлами
+        form = MovieForm(request.POST, request.FILES) 
         if form.is_valid():
-            form.save()  # Зберігаємо дані разом із зображенням
+            form.save() 
             return redirect('movie_list')
     else:
         form = MovieForm()
     return render(request, 'movies/movie_create.html', {'form': form})
 
-def movie_update(request, pk):
-    movie = Movie.objects.get(id=pk)
+def movie_update(request, pk): 
+    movie = get_object_or_404(Movie, pk=pk) 
+    
     if request.method == 'POST':
-        form = MovieForm(request.POST, request.FILES, instance=movie)  # Додано request.FILES для оновлення файлу
+        form = MovieForm(request.POST, request.FILES, instance=movie)
+        if request.FILES and movie.photo: 
+            movie.photo.delete()
         if form.is_valid():
-            form.save()  # Зберігаємо зміни разом із оновленням зображення
+            form.save() 
             return redirect('movie_list')
     else:
         form = MovieForm(instance=movie)
+    
     return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
+
 
 def movie_delete(request, pk):
     movie = Movie.objects.get(id=pk)
     movie.delete()
+    movie.photo.delete()
     return HttpResponseRedirect(reverse('movie_list'))

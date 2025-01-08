@@ -28,7 +28,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Оновити фільм: {{ movie.title }}</h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="id_title">Назва фільму</label>
@@ -49,6 +49,10 @@
             <div class="form-group">
                 <label for="id_genre">Жанр</label>
                 {{ form.genre }}
+            </div>
+            <div class="form-group">
+                <label class="form-label">Image</label>
+                <input type="file" name="photo" class="form-control" placeholder="Choose photo of film">
             </div>
             <button type="submit" class="btn btn-primary">Оновити</button>
         </form>
