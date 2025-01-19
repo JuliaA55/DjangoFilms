@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.forms import model_to_dict
 from .models import Movie
 from .forms import MovieForm
 from django.http import HttpResponseRedirect
@@ -12,7 +13,13 @@ def movie_list(request):
 # Деталі конкретного фільму
 def movie_detail(request, id):
     movie = get_object_or_404(Movie, pk=id)
-    return render(request, 'movies/movie_detail.html', {'movie': movie})
+    return render(request, 'movies/movie_detail.html', {
+        "movie": {
+            **model_to_dict(movie),
+            "genreName": dict(movie.GENRES).get(movie.genre)
+            }
+        })
+        
 
 
 
@@ -24,7 +31,7 @@ def movie_create(request):
             return redirect('movie_list')
     else:
         form = MovieForm()
-    return render(request, 'movies/movie_create.html', {'form': form})
+    return render(request, 'movies/movie_create.html', {'form': form, "genres": Movie.GENRES})
 
 def movie_update(request, pk): 
     movie = get_object_or_404(Movie, pk=pk) 
@@ -39,11 +46,14 @@ def movie_update(request, pk):
     else:
         form = MovieForm(instance=movie)
     
-    return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie})
+    return render(request, 'movies/movie_update.html', {'form': form, 'movie': movie,"genres": Movie.GENRES})
 
 
 def movie_delete(request, pk):
     movie = Movie.objects.get(id=pk)
-    movie.delete()
-    movie.photo.delete()
+    if movie is not None:
+        movie.delete()
+
+    if movie.photo:
+        movie.photo.delete()
     return HttpResponseRedirect(reverse('movie_list'))
