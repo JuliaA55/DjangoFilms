@@ -4,6 +4,7 @@ from .models import Movie
 from .forms import MovieForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 def movie_list(request):
@@ -19,8 +20,6 @@ def movie_detail(request, id):
             "genreName": dict(movie.GENRES).get(movie.genre)
             }
         })
-        
-
 
 
 def movie_create(request):
@@ -57,3 +56,4 @@ def movie_delete(request, pk):
     if movie.photo:
         movie.photo.delete()
     return HttpResponseRedirect(reverse('movie_list'))
+
